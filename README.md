@@ -1,2 +1,2 @@
 # Android_Game
-game
+Developing rogalic android game
