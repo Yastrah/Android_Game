@@ -7,18 +7,23 @@ public class Inventory : MonoBehaviour
     // public bool[] isFull;
     // public GameObject[] slots;
     public GameObject inventory;
+    public GameObject leftJoystick;
+    public GameObject rightJoystick;
     
-    private bool isOpen;
+    public bool isOpen = false;
 
     void Start()
     {
-        isOpen = false;
+        // isOpen = false;
     }
 
     public void OpenInventory() {
         if(!isOpen) {
             isOpen = true;
             inventory.SetActive(true);
+
+            leftJoystick.SetActive(false);
+            rightJoystick.SetActive(false);
         }
     }
 
@@ -26,6 +31,9 @@ public class Inventory : MonoBehaviour
         if(isOpen) {
             isOpen = false;
             inventory.SetActive(false);
+
+            leftJoystick.SetActive(true);
+            rightJoystick.SetActive(true);
         }
     }
 }

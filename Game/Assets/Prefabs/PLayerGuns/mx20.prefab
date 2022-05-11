@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4999659930398478683}
   - component: {fileID: 4999659930398478676}
   m_Layer: 0
-  m_Name: automatic guns_0
+  m_Name: mx20
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,10 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c298d70ff5eff74ea395e304e05ad16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
   bullet: {fileID: 2654174396494054285, guid: 02e6102bcb2f41f498d4b673f58ca66d, type: 3}
   shotPoint: {fileID: 4999659930867845140}
-  reload: 0.2
+  reload: 3
   offset: 0
 --- !u!1 &4999659930867845141
 GameObject:

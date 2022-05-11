@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7377323958555262738}
   - component: {fileID: -732988606551611187}
   m_Layer: 0
-  m_Name: automatic guns_1
+  m_Name: mx20_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2654174396494054285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3824223, y: -0.17319492, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,7 +49,8 @@ MonoBehaviour:
   speed: 10
   lifeTime: 2
   damage: 1
-  solidObjectsLayer: 3
+  solidLayer: 3
+  effect: 0
 --- !u!61 &6810722024452881951
 BoxCollider2D:
   m_ObjectHideFlags: 0

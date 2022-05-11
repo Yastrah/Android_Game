@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyGunBullet : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
@@ -20,15 +20,16 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == solidLayer) { // проверка на твёрдость слоя
-            if(other.CompareTag("Player")) {
+
+            if(other.CompareTag("Enemy")) {
                 return;
             }
             
-            if(other.CompareTag("Enemy")) { // проверка конкретного тега твёрдого объекта
-                Debug.Log("hit Enemy");
-                other.GetComponent<Enemy>().TakeDamage(damage, effect); // вызов функции получения урона
+            if(other.CompareTag("Player")) { // проверка конкретного тега твёрдого объекта
+                Debug.Log("hit Player");
+                other.GetComponent<Player>().TakeDamage(damage, effect); // вызов функции получения урона
             }
-            
+
             DestroyBullet();
         }
     }
@@ -36,5 +37,4 @@ public class Bullet : MonoBehaviour
     private void DestroyBullet() { // функция уничтожения пули. добавить эффект
         Destroy(gameObject);
     }
-
 }
