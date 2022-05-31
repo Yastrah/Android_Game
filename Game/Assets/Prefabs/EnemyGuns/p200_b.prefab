@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2361795982284059914}
   - component: {fileID: 672404560333798568}
   - component: {fileID: 187840016105813507}
-  - component: {fileID: 8471085079514418650}
+  - component: {fileID: 5583673814714074105}
   m_Layer: 0
   m_Name: p200_b
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.05}
   m_EdgeRadius: 0
---- !u!114 &8471085079514418650
+--- !u!114 &5583673814714074105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,11 +141,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1289382548423981284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfa82c78443c254f9b8e0403603d039, type: 3}
+  m_Script: {fileID: 11500000, guid: 6241267a21537224fa4bc6a21a0b365e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lifeTime: 1
   damage: 1
   solidLayer: 3
+  ignore: 1
   effect: 0
+  lifeTime: 1

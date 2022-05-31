@@ -9,11 +9,11 @@ public class Notes
         Slowness,
     }
 
-    public enum BulletEffect { // перечисление возможных эффектов, где None - нет эффектов
-        None,
-        Slowness,
-        Ice,
-    }
+    // public enum BulletEffect { // перечисление возможных эффектов, где None - нет эффектов
+    //     None,
+    //     Slowness,
+    //     Ice,
+    // }
 
 
     public static GameObject findChildWithTag(GameObject parent, string tag) { // ищет один объект наследник(лежащие внутри родителя) с определённым тегом.

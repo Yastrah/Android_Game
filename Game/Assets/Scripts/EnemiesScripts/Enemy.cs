@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Animator anim;
-    private EnemyGun gun;
+    private Weapon weapon;
     private Player player;
 
 
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         texture.SetActive(false); // отключение статичной текстуры
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>(); // получение анимаций
-        gun = Notes.findChildWithTag(gameObject, "EnemyGun").GetComponent<EnemyGun>();
+        weapon = Notes.findChildWithTag(gameObject, "Weapon").GetComponent<Weapon>();
         player = FindObjectOfType<Player>();
     }
 
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage, Notes.BulletEffect effect) {
+    public void TakeDamage(int damage, Notes.Effect effect) {
         health -= damage;
     }
 
@@ -61,9 +61,9 @@ public class Enemy : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
-        Vector3 GunScaler = gun.transform.localScale;
+        Vector3 GunScaler = weapon.transform.localScale;
         GunScaler.x *= -1;
-        gun.transform.localScale = GunScaler;
+        weapon.transform.localScale = GunScaler;
     }
 
 
