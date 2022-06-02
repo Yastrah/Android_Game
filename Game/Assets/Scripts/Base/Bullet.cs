@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,14 +19,14 @@ public class Bullet : MonoBehaviour
     }
 
     protected void Start() {
+        Invoke("DestroyBullet", lifeTime); // вызов уничтожения пули по истечении lifeTime
+
         switch (ignore) {
             case GameTag.Player:
                 hit = GameTag.Enemy;
                 break;
             case GameTag.Enemy:
                 hit = GameTag.Player;
-                break;
-            default:
                 break;
         }
     }
@@ -50,8 +50,6 @@ public class Bullet : MonoBehaviour
                         break;
                     case GameTag.Enemy:
                         other.GetComponent<Enemy>().TakeDamage(damage, effect); // вызов функции получения урона
-                        break;
-                    default:
                         break;
                 }
                 

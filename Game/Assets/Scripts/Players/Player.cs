@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     public Joystick leftJoystick;
     public Joystick rightJoystick;
-    public GameObject texture; // статичная текстура
 
     public float speed;
     public int health;
@@ -15,18 +14,19 @@ public class Player : MonoBehaviour
     private bool facingRight = true;
     private Rigidbody2D rb;
     private Vector2 moveInput; // вектор объекта. Считывает в каком направлении объект движется
+    private GameObject objAnimation; // объект со всей отрисовкой и анимациями
     private Animator anim;
-    private Weapon gun;
+    // private Weapon gun;
     private Inventory inventory;
     private Notes.Effect effect;
 
 
     private void Start()
     {
-        texture.SetActive(false); // отключение статичной текстуры
-        gun = Notes.findActiveChildWithTag(gameObject, "Weapon").GetComponent<Weapon>();
+        // gun = Notes.findActiveChildWithTag(gameObject, "Weapon").GetComponent<Weapon>();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>(); // получение анимаций
+        objAnimation = Notes.findChildByName(gameObject, "Animation");
+        anim = objAnimation.GetComponent<Animator>(); // получение анимаций
         inventory = GetComponent<Inventory>();
         // Debug.Log(texture.activeSelf); // проверка на активность объекта
         // Debug.Log(texture.activeInHierarchy); // относительно всей сцены
@@ -73,13 +73,9 @@ public class Player : MonoBehaviour
     private void Flip() { // разворот спрайта относительно Х
         facingRight = !facingRight;
 
-        Vector3 Scaler = transform.localScale;
+        Vector3 Scaler = objAnimation.transform.localScale;
         Scaler.x *= -1;
-        transform.localScale = Scaler;
-
-        Vector3 GunScaler = gun.transform.localScale;
-        GunScaler.x *= -1;
-        gun.transform.localScale = GunScaler;
+        objAnimation.transform.localScale = Scaler;
     }
 
 

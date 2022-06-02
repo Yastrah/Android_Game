@@ -46,4 +46,14 @@ public class Notes
         }
         return childrenWithTag;
     }
+
+    public static GameObject findChildByName(GameObject parent, string name) {
+        Transform[] children = parent.GetComponentsInChildren<Transform>();
+        foreach(Transform t in children) {
+            if(t.gameObject.name == name) {
+                return t.gameObject;
+            }
+        }
+        return null;
+    }
 }

@@ -49,9 +49,6 @@ public class Rifle : Weapon
                 else { reloadTime -= Time.deltaTime; }
 
                 break; //---------------------------------------------------------------------------------------------------------------------//
-
-            default:
-                break;
         }
 
         
