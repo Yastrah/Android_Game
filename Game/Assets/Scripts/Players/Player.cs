@@ -2,40 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Player : MonoBehaviour
 {
     public Joystick leftJoystick;
     public Joystick rightJoystick;
 
-    public float speed;
-    public int health;
+    [SerializeField] private float speed;
+    [SerializeField] private int health;
+    [SerializeField] private float power;
     
-    private bool facingRight = true;
     private Rigidbody2D rb;
     private Vector2 moveInput; // вектор объекта. Считывает в каком направлении объект движется
     private GameObject objAnimation; // объект со всей отрисовкой и анимациями
     private Animator anim;
-    // private Weapon gun;
     private Inventory inventory;
-    private Notes.Effect effect;
 
+    private Notes.Effect effect;
+    private bool facingRight = true;
+
+    private Push push;
+    private bool isPushing = false;
+    private float pushSpeed;
+    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 1.4f, ["speed"] = 5f }; 
 
     private void Start()
     {
-        // gun = Notes.findActiveChildWithTag(gameObject, "Weapon").GetComponent<Weapon>();
         rb = GetComponent<Rigidbody2D>();
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
         inventory = GetComponent<Inventory>();
-        // Debug.Log(texture.activeSelf); // проверка на активность объекта
-        // Debug.Log(texture.activeInHierarchy); // относительно всей сцены
+        
     }
 
     private void Update() // вся логика перед новым кадром 
     {
-        moveInput = new Vector2(leftJoystick.Horizontal, leftJoystick.Vertical); // считывае горизонтальное и вертикальное движение джостика
-        
+        if(isPushing) {
+            push.OnPushStay(ref moveInput, ref pushSpeed);
+
+            if(pushSpeed <= 0) {
+                isPushing = false;
+                push = null;
+            }
+        }
+        else {
+            moveInput = new Vector2(leftJoystick.Horizontal, leftJoystick.Vertical); // считывае горизонтальное и вертикальное движение джостика
+        }
+
         DrawLogic(); // проверка логики отрисовки
 
         if(health <= 0) { Death(); } // обработка смерти
@@ -46,23 +60,36 @@ public class Player : MonoBehaviour
         if(inventory.isOpen == true) {
             rb.velocity = new Vector2(0f, 0f);
         }
+        else if(isPushing) {
+            rb.velocity = new Vector2(moveInput.x, moveInput.y) * pushSpeed; // присваивание скорости
+        }
         else {
             rb.velocity = new Vector2(moveInput.x, moveInput.y) * speed; // присваивание скорости
         }
     }
 
-    // private void OnTriggerEnter2D(Collider2D other) {}
-    // private void OnCollisionEnter2D(Collision2D other) { Debug.Log(other.gameObject.name); }
-    // Debug.Log("информация"); // вывод вспомогательной информации в консоль
-    // transform.eulerAngles = new Vector3(0, 180, 0); // альтернативный разворот
+    private void OnCollisionEnter2D(Collision2D other) {
+        // Debug.Log(other.gameObject.name);
+        if(isPushing) {
+            isPushing = false;
+            push = null;
+        }
+
+        if(other.gameObject.tag == "Enemy") {
+            isPushing = true;
+            push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
+        }
+        
+    }
 
     public void TakeDamage(int damage, Notes.Effect effect) {
         health -= damage;
     }
 
     private void Death() { // действия при смерти игрока
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //Debug.Log("Player dead");
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Player dead");
+        gameObject.SetActive(false);
     }
 
     private void DrawLogic() { // проверка состояния для изменения активной анимации и отрисовки спрайта
@@ -77,7 +104,5 @@ public class Player : MonoBehaviour
         Scaler.x *= -1;
         objAnimation.transform.localScale = Scaler;
     }
-
-
     
 }

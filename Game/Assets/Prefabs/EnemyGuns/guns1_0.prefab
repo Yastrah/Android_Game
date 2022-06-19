@@ -121,13 +121,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9150214458704766007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71385ba8a3031114787bf25ce9295812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   coolDown: 2
-  controller: 1
   bullet: {fileID: 1289382548423981284, guid: 7b74155543317e64e9d6c918b7f5eb23, type: 3}
   shotPoint: {fileID: 9150214456977453073}

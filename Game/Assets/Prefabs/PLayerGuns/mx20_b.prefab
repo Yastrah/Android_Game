@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510055472541700282}
+  - component: {fileID: -4385847993856421081}
   - component: {fileID: 6810722024452881951}
   - component: {fileID: -7377323958555262738}
   - component: {fileID: -732988606551611187}
-  - component: {fileID: -4385847993856421081}
   m_Layer: 0
   m_Name: mx20_b
   m_TagString: Untagged
@@ -34,6 +34,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4385847993856421081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654174396494054285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6241267a21537224fa4bc6a21a0b365e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2
+  speed: 15
+  damage: 1
+  solidLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  ignore: 0
+  effect: 0
 --- !u!61 &6810722024452881951
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99,7 +119,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 579549221
   m_SortingLayer: 1
-  m_SortingOrder: 6
+  m_SortingOrder: 3
   m_Sprite: {fileID: 489068105535877579, guid: 4dbfe654eb696ab4290b787fc827fb36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,21 +152,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-4385847993856421081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2654174396494054285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6241267a21537224fa4bc6a21a0b365e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  damage: 1
-  solidLayer: 3
-  ignore: 0
-  effect: 0
-  lifeTime: 2

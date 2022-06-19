@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] protected Notes.WarriorType enemyType; // тип противника
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
+    [SerializeField] protected int pushDamage; // урон при столкновении
     
     protected Rigidbody2D rb;
     protected GameObject objAnimation; // объект со всей отрисовкой и анимациями
@@ -13,7 +16,11 @@ public class Enemy : MonoBehaviour
     protected Player player;
     protected Vector2 move;
     protected StatusType status;
-    // protected Weapon weapon;
+
+    protected Push push;
+    protected bool isPushing = false;
+    protected float pushSpeed;
+    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 0.6f, ["speed"] = 3.5f }; 
 
     private bool facingRight = true;
 
@@ -27,7 +34,6 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
-        // weapon = Notes.findChildWithTag(gameObject, "Weapon").GetComponent<Weapon>();
         player = FindObjectOfType<Player>();
     }
 
@@ -38,6 +44,19 @@ public class Enemy : MonoBehaviour
         if(health <= 0) { Death(); } // обработка смерти
     }
 
+    protected void OnCollisionEnter2D(Collision2D other) {
+        if(isPushing) {
+            isPushing = false;
+            push = null;
+        }
+
+        if(other.gameObject.tag == "Player") {
+            player.TakeDamage(pushDamage, Notes.Effect.None);
+            Debug.Log("push Player");
+            isPushing = true;
+            push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
+        }
+    }
 
     protected void PassiveBehaviour() { // пассивное поведение
         // write

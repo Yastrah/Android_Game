@@ -6,7 +6,11 @@ public class Notes
 {
     public enum Effect { // перечисление возможных эффектов, где None - нет эффектов
         None,
-        Slowness,
+        Stun,
+    }
+
+    public enum WarriorType {
+        Sniper
     }
 
     // public enum BulletEffect { // перечисление возможных эффектов, где None - нет эффектов
@@ -15,6 +19,18 @@ public class Notes
     //     Ice,
     // }
 
+    // private void OnTriggerEnter2D(Collider2D other) {}
+    // Debug.Log("информация"); // вывод вспомогательной информации в консоль
+    // transform.eulerAngles = new Vector3(0, 180, 0); // альтернативный разворот
+
+    // Debug.Log(texture.activeSelf); // проверка на активность объекта
+    // Debug.Log(texture.activeInHierarchy); // относительно всей сцены
+    // Debug.Log(difference.magnitude);
+    // Debug.ClearDeveloperConsole();
+    // Debug.LogError();
+    // Debug.LogException();
+    // Debug.LogWarning();
+    // Quaternion.identity - Этот кватернион соответствует «отсутствию вращения» — объект идеально выровнен с мировыми или родительскими осями.
 
     public static GameObject findChildWithTag(GameObject parent, string tag) { // ищет один объект наследник(лежащие внутри родителя) с определённым тегом.
         Transform[] children = parent.GetComponentsInChildren<Transform>();

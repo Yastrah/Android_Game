@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected WeaponType type; // тип оружия
-    [SerializeField] protected float coolDown; // время между выcтрелами/ударами в СОТЫХ СЕКУНДЫ
-    [SerializeField] protected ControlType controller; // тип управления (для кого скрипт)
+    [SerializeField] protected WeaponType weaponType; // тип оружия
+    [SerializeField] protected float coolDown; // время между выcтрелами/ударами
 
     protected float reloadTime; // вспомогательная переменная для хранения времени до выстрела/удара
     protected Player player;
-
-    public enum ControlType { // тип управления оружием
-        Joystick,
-        FollowPlayer
-    }
 
     protected enum WeaponType {
         AssaultRifle, // штурмовая винтовка
@@ -23,7 +17,8 @@ public class Weapon : MonoBehaviour
         Sword, // меч
     }
 
-    protected void Start() {
+    protected void Start() 
+    {
         player = FindObjectOfType<Player>();
         reloadTime = coolDown;
     }

@@ -1,13 +1,14 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float lifeTime;
     [SerializeField] protected float speed;
     [SerializeField] protected int damage;
-    [SerializeField] protected int solidLayer; // что пуля будет считать твердым (номер LayerMask)
+    [SerializeField] protected LayerMask solidLayer; // что пуля будет считать твердым (номер LayerMask)
     [SerializeField] protected GameTag ignore; // тэг, объекты которого пуля будет игнорировать
     [SerializeField] protected Notes.Effect effect;
 
@@ -34,9 +35,9 @@ public class Bullet : MonoBehaviour
     protected void Update() {
         transform.Translate(Vector2.right * speed * Time.deltaTime); // перемещение пули
     }
-
+    
     protected void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.layer == solidLayer) { // проверка на твёрдость слоя
+        if(other.gameObject.layer == Math.Log(solidLayer.value, 2)) { // проверка на твёрдость слоя
             if(other.CompareTag(ignore.ToString())) {
                 return;
             }
