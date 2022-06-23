@@ -7,8 +7,8 @@ public class Inventory : MonoBehaviour
     // public bool[] isFull;
     // public GameObject[] slots;
     public GameObject inventory;
-    public GameObject leftJoystick;
-    public GameObject rightJoystick;
+    public GameObject joystick;
+    public GameObject shootButton;
     
     public bool isOpen = false;
 
@@ -22,8 +22,8 @@ public class Inventory : MonoBehaviour
             isOpen = true;
             inventory.SetActive(true);
 
-            leftJoystick.SetActive(false);
-            rightJoystick.SetActive(false);
+            joystick.SetActive(false);
+            shootButton.SetActive(false);
         }
     }
 
@@ -32,8 +32,8 @@ public class Inventory : MonoBehaviour
             isOpen = false;
             inventory.SetActive(false);
 
-            leftJoystick.SetActive(true);
-            rightJoystick.SetActive(true);
+            joystick.SetActive(true);
+            shootButton.SetActive(true);
         }
     }
 }

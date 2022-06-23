@@ -17,6 +17,13 @@ public class PausePanel : MonoBehaviour
         panel.SetActive(false);
     }
 
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if(!hasFocus) {
+            Pause();
+        }
+    }
+
     // public void Menu() {
     //     SceneManager.LoadScene("MainMenu");
     //     Time.timeScale = 1f;

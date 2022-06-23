@@ -52,7 +52,7 @@ MonoBehaviour:
   solidLayer:
     serializedVersion: 2
     m_Bits: 8
-  ignore: 0
+  target: 1
   effect: 0
 --- !u!61 &6810722024452881951
 BoxCollider2D:

@@ -161,7 +161,8 @@ public class RangedEnemy : Enemy
     }
 
     private void Shoot() {
-        Instantiate(bullet, shotPoint.position, weapon.transform.rotation); // создание объекта пули в месте shotPoint
+        GameObject newBullet = Instantiate(bullet, shotPoint.position, weapon.transform.rotation); // создание объекта пули в месте shotPoint
+        newBullet.GetComponent<Bullet>().setPatent(gameObject.name);
         reloadTime = coolDown; // обнуление времени межлу выстрелами
     }
 }

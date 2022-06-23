@@ -45,10 +45,10 @@ public class Enemy : MonoBehaviour
     }
 
     protected void OnCollisionEnter2D(Collision2D other) {
-        if(isPushing) {
-            isPushing = false;
-            push = null;
-        }
+        // if(isPushing) {
+        //     isPushing = false;
+        //     push = null;
+        // }
 
         if(other.gameObject.tag == "Player") {
             player.TakeDamage(pushDamage, Notes.Effect.None);

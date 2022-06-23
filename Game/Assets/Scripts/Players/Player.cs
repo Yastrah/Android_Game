@@ -6,12 +6,14 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    public Joystick leftJoystick;
-    public Joystick rightJoystick;
+    // public Joystick controller.joystick;
+    // public Joystick rightJoystick;
 
     [SerializeField] private float speed;
     [SerializeField] private int health;
     [SerializeField] private float power;
+    
+    public Controller controller;
     
     private Rigidbody2D rb;
     private Vector2 moveInput; // вектор объекта. Считывает в каком направлении объект движется
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        controller = GetComponent<Controller>();
         rb = GetComponent<Rigidbody2D>();
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
             }
         }
         else {
-            moveInput = new Vector2(leftJoystick.Horizontal, leftJoystick.Vertical); // считывае горизонтальное и вертикальное движение джостика
+            moveInput = new Vector2(controller.joystick.Horizontal, controller.joystick.Vertical); // считывае горизонтальное и вертикальное движение джостика
         }
 
         DrawLogic(); // проверка логики отрисовки
@@ -70,10 +73,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         // Debug.Log(other.gameObject.name);
-        if(isPushing) {
-            isPushing = false;
-            push = null;
-        }
+        // if(isPushing) {
+        //     isPushing = false;
+        //     push = null;
+        // }
 
         if(other.gameObject.tag == "Enemy") {
             isPushing = true;
@@ -81,6 +84,10 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    // public void Fire() {
+    //     Notes.findActiveChildWithTag(gameObject, "Weapon").GetComponent<Weapon>().Fire();
+    // }
 
     public void TakeDamage(int damage, Notes.Effect effect) {
         health -= damage;

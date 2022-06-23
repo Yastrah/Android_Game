@@ -96,11 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71385ba8a3031114787bf25ce9295812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  weaponType: 0
   coolDown: 0.3
-  controller: 0
   bullet: {fileID: 2654174396494054285, guid: 02e6102bcb2f41f498d4b673f58ca66d, type: 3}
   shotPoint: {fileID: 4999659930867845140}
+  solidLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &4999659930867845141
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ GameObject:
   m_Layer: 0
   m_Name: shotPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

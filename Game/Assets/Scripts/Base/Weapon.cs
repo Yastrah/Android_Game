@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float coolDown; // время между выcтрелами/ударами
 
     protected float reloadTime; // вспомогательная переменная для хранения времени до выстрела/удара
-    protected Player player;
+    protected Controller controller;
 
     protected enum WeaponType {
         AssaultRifle, // штурмовая винтовка
@@ -19,8 +20,12 @@ public class Weapon : MonoBehaviour
 
     protected void Start() 
     {
-        player = FindObjectOfType<Player>();
+        controller = FindObjectOfType<Controller>();
         reloadTime = coolDown;
     }
+
+    // public virtual void Fire() { // функцие вызывающаяся при нажатии на кнопку стрельбы
+    //     Debug.Log(1);
+    // }
 
 }

@@ -9,27 +9,22 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected int damage;
     [SerializeField] protected LayerMask solidLayer; // что пуля будет считать твердым (номер LayerMask)
-    [SerializeField] protected GameTag ignore; // тэг, объекты которого пуля будет игнорировать
+    [SerializeField] protected GameTag target; // тэг, объекты которого пуля будет игнорировать
     [SerializeField] protected Notes.Effect effect;
 
-    protected GameTag hit; // тэг, с объектами которого пуля будет взаимодействовать
-
+    protected string parentName = ""; // имя объекта, пустившего пулю
+    
     public enum GameTag {
         Player,
         Enemy
     }
 
+    public void setPatent(string parentName) {
+        this.parentName = parentName;
+    }
+
     protected void Start() {
         Invoke("DestroyBullet", lifeTime); // вызов уничтожения пули по истечении lifeTime
-
-        switch (ignore) {
-            case GameTag.Player:
-                hit = GameTag.Enemy;
-                break;
-            case GameTag.Enemy:
-                hit = GameTag.Player;
-                break;
-        }
     }
 
     protected void Update() {
@@ -38,14 +33,14 @@ public class Bullet : MonoBehaviour
     
     protected void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == Math.Log(solidLayer.value, 2)) { // проверка на твёрдость слоя
-            if(other.CompareTag(ignore.ToString())) {
+            if(other.gameObject.name == parentName) {
                 return;
             }
             
-            if(other.CompareTag(hit.ToString())) { // проверка конкретного тега твёрдого объекта
-                Debug.Log($"hit {hit.ToString()}");
+            if(other.CompareTag(target.ToString())) { // проверка конкретного тега твёрдого объекта
+                Debug.Log($"hit {target.ToString()}");
 
-                switch (hit) {
+                switch (target) {
                     case GameTag.Player:
                         other.GetComponent<Player>().TakeDamage(damage, effect); // вызов функции получения урона
                         break;
