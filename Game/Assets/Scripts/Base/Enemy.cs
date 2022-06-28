@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     protected float pushSpeed;
     private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 0.6f, ["speed"] = 3.5f }; 
 
+    public bool isVisible = false;
     private bool facingRight = true;
 
     protected enum StatusType {
@@ -39,23 +40,16 @@ public class Enemy : MonoBehaviour
 
     protected void Update()
     {
+        if(isVisible) {
+            status = StatusType.Aggressive;
+        }
+        else {
+            status = StatusType.Passive;
+        }
+
         DrawLogic(); // проверка логики отрисовки
 
         if(health <= 0) { Death(); } // обработка смерти
-    }
-
-    protected void OnCollisionEnter2D(Collision2D other) {
-        // if(isPushing) {
-        //     isPushing = false;
-        //     push = null;
-        // }
-
-        if(other.gameObject.tag == "Player") {
-            player.TakeDamage(pushDamage, Notes.Effect.None);
-            Debug.Log("push Player");
-            isPushing = true;
-            push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
-        }
     }
 
     protected void PassiveBehaviour() { // пассивное поведение
@@ -88,6 +82,20 @@ public class Enemy : MonoBehaviour
         Vector3 Scaler = objAnimation.transform.localScale;
         Scaler.x *= -1;
         objAnimation.transform.localScale = Scaler;
+    }
+
+    protected void OnCollisionEnter2D(Collision2D other) {
+        // if(isPushing) {
+        //     isPushing = false;
+        //     push = null;
+        // }
+
+        if(other.gameObject.tag == "Player") {
+            player.TakeDamage(pushDamage, Notes.Effect.None);
+            Debug.Log("push Player");
+            isPushing = true;
+            push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
+        }
     }
 
 }

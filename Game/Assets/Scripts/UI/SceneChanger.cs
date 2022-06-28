@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
-    [SerializeField] private int scene; // сцена на которую нужно перейти
     [SerializeField] private GameObject loadingScreen;
+    private int scene; // сцена на которую нужно перейти
 
     private Animator anim;
 
@@ -16,22 +16,21 @@ public class SceneChanger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void FadeToScene() {
+    public void FadeToScene(int scene) {
+        this.scene = scene;
         Time.timeScale = 1f;
         anim.SetTrigger("fade");
     }
 
     public void OnFadeExit() {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(this.scene);
         StartCoroutine(LoadingScreenOnFade());
     }
 
     IEnumerator LoadingScreenOnFade() {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         loadingScreen.SetActive(true);
-        // Debug.Log("IEnumerator");
         while(!operation.isDone) {
-            // Debug.Log("not done");
             yield return null;
         }
     }

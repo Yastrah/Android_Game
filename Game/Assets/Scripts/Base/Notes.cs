@@ -19,6 +19,20 @@ public class Notes
     //     Ice,
     // }
 
+    // [HideInInspector]
+    // [SerializeField]
+
+    // GameObject obj = Resources.Load("Prefabs/Enemy/Enemies/PunkEnemy") as GameObject;
+    // Debug.Log(obj.name);
+
+    // OnBecameVisible()
+    // OnBecameInvisible()
+    // public bool IsVisible() {
+    //         return GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(Camera.main), GetComponent<BoxCollider2D>().bounds);
+    // }
+
+    // Occlusion Culling
+
     // private void OnTriggerEnter2D(Collider2D other) {}
     // Debug.Log("информация"); // вывод вспомогательной информации в консоль
     // transform.eulerAngles = new Vector3(0, 180, 0); // альтернативный разворот

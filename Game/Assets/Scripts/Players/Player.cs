@@ -6,14 +6,10 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    // public Joystick controller.joystick;
-    // public Joystick rightJoystick;
-
     [SerializeField] private float speed;
     [SerializeField] private int health;
-    [SerializeField] private float power;
     
-    public Controller controller;
+    [HideInInspector] public Controller controller;
     
     private Rigidbody2D rb;
     private Vector2 moveInput; // вектор объекта. Считывает в каком направлении объект движется
@@ -36,7 +32,6 @@ public class Player : MonoBehaviour
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
         inventory = GetComponent<Inventory>();
-        
     }
 
     private void Update() // вся логика перед новым кадром 

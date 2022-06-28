@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -732988606551611187}
   m_Layer: 0
   m_Name: mx20_b
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,11 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2654174396494054285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6241267a21537224fa4bc6a21a0b365e, type: 3}
+  m_Script: {fileID: 11500000, guid: 397e063629ba6ff4dbc7bc75593e5df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2
-  speed: 15
+  lifeTime: 3
+  speed: 12
   damage: 1
   solidLayer:
     serializedVersion: 2

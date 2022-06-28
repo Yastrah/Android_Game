@@ -67,7 +67,7 @@ public class Rifle : Weapon
             if(hitInfo.collider != null) {
                 // Debug.Log(hitInfo.collider.name);
                 if(hitInfo.collider.tag == "Enemy") {
-                    if(nearEnemy == null || hitInfo.distance < minDistance) {
+                    if((nearEnemy == null || hitInfo.distance < minDistance) && hitInfo.collider.gameObject.GetComponent<Enemy>().isVisible) {
                         nearEnemy = enemy;
                         minDistance = hitInfo.distance;
                     }
@@ -88,7 +88,7 @@ public class Rifle : Weapon
 
     private void Shoot() { // выстрел
         GameObject newBullet = Instantiate(bullet, shotPoint.position, transform.rotation); // создание объекта пули в месте shotPoint
-        newBullet.GetComponent<Bullet>().setPatent(transform.parent.gameObject.name);
+        newBullet.GetComponent<Bullet>().PatentName = transform.parent.gameObject.name;
         reloadTime = coolDown; // обнуление времени межлу выстрелами
     }
 

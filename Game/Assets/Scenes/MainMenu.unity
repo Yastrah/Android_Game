@@ -621,9 +621,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951810977}
+  - component: {fileID: 951810978}
   - component: {fileID: 951810980}
   - component: {fileID: 951810979}
-  - component: {fileID: 951810978}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -761,7 +761,7 @@ GameObject:
   - component: {fileID: 1074162732}
   - component: {fileID: 1074162731}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Main Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,9 +938,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1922954688}
+  - component: {fileID: 1922954689}
   - component: {fileID: 1922954691}
   - component: {fileID: 1922954690}
-  - component: {fileID: 1922954689}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1026,11 +1026,11 @@ MonoBehaviour:
       - m_Target: {fileID: 222986052}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: FadeToScene
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

@@ -53,7 +53,7 @@ public class RangedEnemy : Enemy
         }
         else {
             // move = new Vector2(0, 0);
-
+            // Debug.Log($"{gameObject.name}:    {status}");
             switch (status)
             {
                 case StatusType.Passive:
@@ -61,7 +61,7 @@ public class RangedEnemy : Enemy
                     break;
                 case StatusType.Aggressive:
                     AggressiveBehaviour();
-
+                    
                     switch (gunType)
                     {
                         case GunType.Static:
@@ -162,7 +162,8 @@ public class RangedEnemy : Enemy
 
     private void Shoot() {
         GameObject newBullet = Instantiate(bullet, shotPoint.position, weapon.transform.rotation); // создание объекта пули в месте shotPoint
-        newBullet.GetComponent<Bullet>().setPatent(gameObject.name);
+        newBullet.GetComponent<Bullet>().PatentName = gameObject.name;
         reloadTime = coolDown; // обнуление времени межлу выстрелами
     }
+
 }

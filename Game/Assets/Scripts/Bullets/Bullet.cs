@@ -19,8 +19,14 @@ public class Bullet : MonoBehaviour
         Enemy
     }
 
-    public void setPatent(string parentName) {
-        this.parentName = parentName;
+    public string PatentName {
+        get {
+            return this.parentName;
+        }
+
+        set {
+            this.parentName = value;
+        }
     }
 
     protected void Start() {
@@ -33,7 +39,7 @@ public class Bullet : MonoBehaviour
     
     protected void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.layer == Math.Log(solidLayer.value, 2)) { // проверка на твёрдость слоя
-            if(other.gameObject.name == parentName) {
+            if(other.gameObject.name == parentName) { // проверка на колайдер объекта выпустившего пулю 
                 return;
             }
             

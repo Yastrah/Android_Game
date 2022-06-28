@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5536316441451427685}
+  - component: {fileID: -2394667227123961578}
   - component: {fileID: 5536316441451427684}
   - component: {fileID: 5536316441451427683}
   - component: {fileID: 5536316441451427682}
   - component: {fileID: 5536316441451427681}
-  - component: {fileID: -2394667227123961578}
   m_Layer: 5
   m_Name: Scene Changer
   m_TagString: Untagged
@@ -41,6 +41,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &-2394667227123961578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536316441451427695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4a5a12b5bb41e479feb43f5acf2560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 1141853015685536648, guid: a4903f1af83eafd4a9f5dfdbe697b0b9, type: 3}
 --- !u!223 &5536316441451427684
 Canvas:
   m_ObjectHideFlags: 0
@@ -121,20 +134,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-2394667227123961578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5536316441451427695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4a5a12b5bb41e479feb43f5acf2560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scene: 0
-  loadiingScreen: {fileID: 1141853015685536648, guid: a4903f1af83eafd4a9f5dfdbe697b0b9, type: 3}
 --- !u!1 &5536316442395837271
 GameObject:
   m_ObjectHideFlags: 0

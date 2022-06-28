@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5476162413950747780}
-  - component: {fileID: 2361795982284059914}
   - component: {fileID: 5583673814714074105}
+  - component: {fileID: 2361795982284059914}
   - component: {fileID: 672404560333798568}
   - component: {fileID: 187840016105813507}
   m_Layer: 0
   m_Name: p200_b
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,6 +34,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5583673814714074105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289382548423981284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397e063629ba6ff4dbc7bc75593e5df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2
+  speed: 7
+  damage: 1
+  solidLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  target: 0
+  effect: 0
 --- !u!212 &2361795982284059914
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,26 +105,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5583673814714074105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289382548423981284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6241267a21537224fa4bc6a21a0b365e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 1
-  speed: 10
-  damage: 1
-  solidLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  target: 0
-  effect: 0
 --- !u!50 &672404560333798568
 Rigidbody2D:
   serializedVersion: 4
