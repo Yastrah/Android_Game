@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SceneChanger : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject logic;
     private int scene; // сцена на которую нужно перейти
 
     private Animator anim;
@@ -22,9 +23,13 @@ public class SceneChanger : MonoBehaviour
         anim.SetTrigger("fade");
     }
 
-    public void OnFadeExit() {
+    public void OnFadeExit() { // перед уходом со сцены
         SceneManager.LoadScene(this.scene);
         StartCoroutine(LoadingScreenOnFade());
+    }
+
+    public void OnFadeEnter() { // при появлении на сцене
+        logic.SetActive(true);
     }
 
     IEnumerator LoadingScreenOnFade() {

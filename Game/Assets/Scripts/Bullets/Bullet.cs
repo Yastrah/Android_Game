@@ -42,6 +42,10 @@ public class Bullet : MonoBehaviour
             if(other.gameObject.name == parentName) { // проверка на колайдер объекта выпустившего пулю 
                 return;
             }
+
+            if(other.CompareTag("Non-Trigger")) {
+                return;
+            }
             
             if(other.CompareTag(target.ToString())) { // проверка конкретного тега твёрдого объекта
                 Debug.Log($"hit {target.ToString()}");

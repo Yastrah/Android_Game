@@ -6,13 +6,14 @@ public class Inventory : MonoBehaviour
 {
     // public bool[] isFull;
     // public GameObject[] slots;
-    public GameObject inventory;
-    public GameObject controllerInterface;
+    [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject controllerInterface;
+    [SerializeField] private DialogueWindow dialogueWindow;
     
     [HideInInspector] public bool isOpen = false;
 
     public void OpenInventory() {
-        if(!isOpen) {
+        if(!isOpen && !dialogueWindow.getStatus()) {
             isOpen = true;
             inventory.SetActive(true);
 
