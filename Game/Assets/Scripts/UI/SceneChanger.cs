@@ -29,7 +29,9 @@ public class SceneChanger : MonoBehaviour
     }
 
     public void OnFadeEnter() { // при появлении на сцене
-        logic.SetActive(true);
+        if(logic) {
+            logic.SetActive(true);
+        }
     }
 
     IEnumerator LoadingScreenOnFade() {

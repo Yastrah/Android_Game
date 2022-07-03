@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
     private void Death() { // действия при смерти игрока
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Player dead");
+        // Debug.Log("Player dead");
         gameObject.SetActive(false);
     }
 

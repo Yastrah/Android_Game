@@ -33,7 +33,6 @@ public class DialogueTrigger : MonoBehaviour
             interaction.ActionName = "";
 
             actionButton.SetActive(false);
-            // dialogueManager.EndDialogue();
         }
     }
 }

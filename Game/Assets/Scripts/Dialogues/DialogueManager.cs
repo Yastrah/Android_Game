@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     
     private Animator anim;
 
+    private string sentence = null;
     private Queue<string> sentences;
     private List<char> decelerationSymbols;
 
@@ -33,21 +34,25 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "...";
         sentences.Clear();
 
-        foreach (string sentence in dialogue.sentences)
-        {
+        foreach (string sentence in dialogue.sentences) {
             sentences.Enqueue(sentence);
         }
-        // DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
-        {
+        if(dialogueText.text != sentence && sentence != null) {
+            StopAllCoroutines();
+            dialogueText.text = sentence;
+            return;
+        }
+        
+        if(sentences.Count == 0) {
             EndDialogue();
             return;
         }
-        string sentence = sentences.Dequeue();
+
+        sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
@@ -55,8 +60,7 @@ public class DialogueManager : MonoBehaviour
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
-        foreach (char symbol in sentence.ToCharArray())
-        {
+        foreach (char symbol in sentence.ToCharArray()) {
             dialogueText.text += symbol;
 
             if(decelerationSymbols.Contains(symbol)) {
@@ -71,6 +75,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         anim.SetBool("openDialogue", false);
+        sentence = null;
     }
     
 }

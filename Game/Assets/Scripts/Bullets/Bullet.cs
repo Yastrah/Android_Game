@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
             }
             
             if(other.CompareTag(target.ToString())) { // проверка конкретного тега твёрдого объекта
-                Debug.Log($"hit {target.ToString()}");
+                // Debug.Log($"hit {target.ToString()}");
 
                 switch (target) {
                     case GameTag.Player:

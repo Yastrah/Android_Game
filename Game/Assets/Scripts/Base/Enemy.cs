@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
     }
 
     protected void Death() { // действия при смерти противника
-        Debug.Log("Enemy dead");
+        // Debug.Log("Enemy dead");
         Destroy(gameObject);
     }
 
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
 
         if(other.gameObject.tag == "Player") {
             player.TakeDamage(pushDamage, Notes.Effect.None);
-            Debug.Log("push Player");
+            // Debug.Log("push Player");
             isPushing = true;
             push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
         }
