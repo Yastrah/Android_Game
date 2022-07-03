@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private Push push;
     private bool isPushing = false;
     private float pushSpeed;
-    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 1.4f, ["speed"] = 5f }; 
+    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 1.4f, ["speed"] = 5f };
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         if(isPushing) {
             push.OnPushStay(ref moveInput, ref pushSpeed);
 
-            if(pushSpeed <= 0) {
+            if(pushSpeed <= 0.1) {
                 isPushing = false;
                 push = null;
             }
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
     private void Death() { // действия при смерти игрока
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Player dead");
+        // Debug.Log("Player dead");
         gameObject.SetActive(false);
     }
 

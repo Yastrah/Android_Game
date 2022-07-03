@@ -45,7 +45,7 @@ public class RangedEnemy : Enemy
         if(isPushing) {
             push.OnPushStay(ref move, ref pushSpeed);
 
-            if(pushSpeed <= 0) {
+            if(pushSpeed <= 0.1) {
                 isPushing = false;
                 push = null;
                 move = new Vector2(0, 0);
