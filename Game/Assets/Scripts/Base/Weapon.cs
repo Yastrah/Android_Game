@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] protected WeaponType weaponType; // тип оружия
-    [SerializeField] protected float coolDown; // время между выcтрелами/ударами
+    [Header("Параметры оружия")]
+    [Tooltip("Тип оружия")]
+    [SerializeField] protected WeaponType weaponType;
+
+    [Tooltip("время между выcтрелами/ударами")]
+    [SerializeField] protected float coolDown;
 
     protected float reloadTime; // вспомогательная переменная для хранения времени до выстрела/удара
     protected Controller controller;
 
+    /// <summary>
+    /// Все типы оружия 
+    /// </summary>
     protected enum WeaponType {
         AssaultRifle, // штурмовая винтовка
         SniperRifle, // снайперская винтовка
@@ -23,9 +30,5 @@ public class Weapon : MonoBehaviour
         controller = FindObjectOfType<Controller>();
         reloadTime = coolDown;
     }
-
-    // public virtual void Fire() { // функцие вызывающаяся при нажатии на кнопку стрельбы
-    //     Debug.Log(1);
-    // }
 
 }

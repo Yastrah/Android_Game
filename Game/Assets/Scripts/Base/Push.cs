@@ -10,6 +10,13 @@ public class Push
     private float boost; // ускорение
     private System.Random rand = new System.Random();
 
+    /// <summary>
+    /// Конструктор с инициализацией, всех необходимых переменных
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="transform"></param>
+    /// <param name="obj"></param>
+    /// <param name="speed"></param>
     public Push(Dictionary<string, float> info, Transform transform, Transform obj, ref float speed) {
         difference = obj.position - transform.position;
         length = info["length"];
@@ -18,6 +25,11 @@ public class Push
         // Debug.Log($"длина: {length}    скорость: {speed}    время: {-speed/boost}    ускорение: {boost}");
     }
 
+    /// <summary>
+    /// Обработка процесса отталкивания 
+    /// </summary>
+    /// <param name="move"></param>
+    /// <param name="speed"></param>
     public void OnPushStay(ref Vector2 move, ref float speed) {
         move.x = -difference.x / (Math.Abs(difference.x) + Math.Abs(difference.y));
         move.y = -difference.y / (Math.Abs(difference.x) + Math.Abs(difference.y));

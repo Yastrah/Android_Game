@@ -1663,7 +1663,7 @@ GameObject:
   - component: {fileID: 809167050}
   - component: {fileID: 809167049}
   m_Layer: 3
-  m_Name: Square (4)
+  m_Name: Dialogue Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3701,10 +3701,10 @@ RectTransform:
   m_Father: {fileID: 64219289}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.88400006, y: 0.887}
+  m_AnchorMin: {x: 0.88400006, y: 0.89400005}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1, y: 0.5}
-  m_SizeDelta: {x: -16, y: -13}
+  m_AnchoredPosition: {x: -1, y: 3.4580998}
+  m_SizeDelta: {x: -16, y: -18.9161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1607335750
 MonoBehaviour:
@@ -3728,7 +3728,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 7ed8259c46cec1c4fb5f07fa9fbb09cf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -4091,8 +4091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7772650cbde0724282969f1a212fd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   health: 999
+  speed: 5
   controller: {fileID: 0}
 --- !u!50 &1750217820
 Rigidbody2D:
@@ -4702,7 +4702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd50740957b97204eaeb4cfca11162f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionButton: {fileID: 222483880}
   dialogueWindow: {fileID: 896941719}
   dialogueText: {fileID: 1398569657}
   nameText: {fileID: 873716939}

@@ -6,13 +6,17 @@ using System;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [Header("Параметры игрока")]
+    [Tooltip("Здоровье игрока")]
     [SerializeField] private int health;
-    
+
+    [Tooltip("Скорость игрока")]
+    [SerializeField] private float speed;
+
     [HideInInspector] public Controller controller;
     
-    private Rigidbody2D rb;
     private Vector2 moveInput; // вектор объекта. Считывает в каком направлении объект движется
+    private Rigidbody2D rb;
     private GameObject objAnimation; // объект со всей отрисовкой и анимациями
     private Animator anim;
     private Inventory inventory;
@@ -34,72 +38,96 @@ public class Player : MonoBehaviour
         inventory = GetComponent<Inventory>();
     }
 
-    private void Update() // вся логика перед новым кадром 
+    private void Update()
     {
-        if(isPushing) {
+        if(isPushing)
+        {
+            // обработка отталкивания
             push.OnPushStay(ref moveInput, ref pushSpeed);
 
-            if(pushSpeed <= 0.1) {
+            if(pushSpeed <= 0.1)
+            {
                 isPushing = false;
                 push = null;
             }
         }
-        else {
-            moveInput = new Vector2(controller.joystick.Horizontal, controller.joystick.Vertical); // считывае горизонтальное и вертикальное движение джостика
+        else
+        {
+            // считывает горизонтальное и вертикальное движение джостика
+            moveInput = new Vector2(controller.joystick.Horizontal, controller.joystick.Vertical);
         }
 
-        DrawLogic(); // проверка логики отрисовки
+        // проверка логики отрисовки
+        DrawLogic();
 
-        if(health <= 0) { Death(); } // обработка смерти
+        // обработка смерти
+        if (health <= 0) { Death(); }
     }
 
-    private void FixedUpdate() // итоговые изменения НА ЭКРАНЕ 
+    private void FixedUpdate()
     {
-        if(inventory.isOpen == true) {
+        if(inventory.isOpen == true)
+        {
             rb.velocity = new Vector2(0f, 0f);
         }
-        else if(isPushing) {
-            rb.velocity = new Vector2(moveInput.x, moveInput.y) * pushSpeed; // присваивание скорости
+        else if(isPushing)
+        {
+            rb.velocity = new Vector2(moveInput.x, moveInput.y) * pushSpeed;
         }
-        else {
-            rb.velocity = new Vector2(moveInput.x, moveInput.y) * speed; // присваивание скорости
+        else
+        {
+            rb.velocity = new Vector2(moveInput.x, moveInput.y) * speed;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        // Debug.Log(other.gameObject.name);
-        // if(isPushing) {
-        //     isPushing = false;
-        //     push = null;
-        // }
-
-        if(other.gameObject.tag == "Enemy") {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // Обработка прикосновения к противнику
+        if (other.gameObject.tag == "Enemy")
+        {
             isPushing = true;
             push = new Push(pushInfo, transform, other.transform, ref pushSpeed);
         }
         
     }
 
-    // public void Fire() {
-    //     Notes.findActiveChildWithTag(gameObject, "Weapon").GetComponent<Weapon>().Fire();
-    // }
-
-    public void TakeDamage(int damage, Notes.Effect effect) {
+    /// <summary>
+    /// Получние урона игроком
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="effect"></param>
+    public void TakeDamage(int damage, Notes.Effect effect)
+    {
         health -= damage;
     }
 
-    private void Death() { // действия при смерти игрока
+    /// <summary>
+    /// Обработка смерти игрока
+    /// </summary>
+    private void Death()
+    {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         // Debug.Log("Player dead");
         gameObject.SetActive(false);
     }
 
-    private void DrawLogic() { // проверка состояния для изменения активной анимации и отрисовки спрайта
-        if((!facingRight && moveInput.x > 0) || (facingRight && moveInput.x < 0)) { Flip(); } // проверка на необходимость развернуть спрайт
-        anim.SetBool("isRunning", moveInput.x != 0 || moveInput.y != 0); // отслеживание состояния для анимаций run\idle
+    /// <summary>
+    /// Проверка состояния и обработка всей отрисовки: анимаций, поворотов и т.п. 
+    /// </summary>
+    private void DrawLogic()
+    {
+        // проверка на необходимость развернуть спрайт
+        if ((!facingRight && moveInput.x > 0) || (facingRight && moveInput.x < 0)) { Flip(); }
+
+        // отслеживание состояния для анимаций run\idle
+        anim.SetBool("isRunning", moveInput.x != 0 || moveInput.y != 0); 
     }
 
-    private void Flip() { // разворот спрайта относительно Х
+    /// <summary>
+    /// разворот спрайта относительно оси Y
+    /// </summary>
+    private void Flip()
+    {
         facingRight = !facingRight;
 
         Vector3 Scaler = objAnimation.transform.localScale;

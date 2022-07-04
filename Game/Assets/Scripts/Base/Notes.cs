@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Notes
 {
-    public enum Effect { // перечисление возможных эффектов, где None - нет эффектов
+    /// <summary>
+    /// Перечисление возможных эффектов, где None - нет эффектов
+    /// </summary>
+    public enum Effect
+    {
         None,
         Stun,
     }
 
-    public enum WarriorType {
+    /// <summary>
+    /// Все возможные типы воинов
+    /// </summary>
+    public enum WarriorType
+    {
         Sniper
     }
 
@@ -46,41 +54,77 @@ public class Notes
     // Debug.LogWarning();
     // Quaternion.identity - Этот кватернион соответствует «отсутствию вращения» — объект идеально выровнен с мировыми или родительскими осями.
 
-    public static GameObject findChildWithTag(GameObject parent, string tag) { // ищет один объект наследник(лежащие внутри родителя) с определённым тегом.
+    /// <summary>
+    /// Ищет один объект наследник(лежащие внутри родителя) с определённым тегом.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns>GameObject объекта с нужным тегом</returns>
+    public static GameObject findChildWithTag(GameObject parent, string tag)
+    {
         Transform[] children = parent.GetComponentsInChildren<Transform>();
-        foreach(Transform t in children) {
-            if(t.gameObject.tag == tag) {
+        foreach(Transform t in children)
+        {
+            if(t.gameObject.tag == tag)
+            {
                 return t.gameObject;
             }
         }
         return null;
     }
 
-    public static GameObject findActiveChildWithTag(GameObject parent, string tag) { // ищет один АКТИВНЫЙ объект наследник(лежащие внутри родителя) с определённым тегом
+    /// <summary>
+    /// Ищет один АКТИВНЫЙ объект наследник(лежащие внутри родителя) с определённым тегом
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns>GameObject активного объекта с нужным тегом</returns>
+    public static GameObject findActiveChildWithTag(GameObject parent, string tag)
+    {
         Transform[] children = parent.GetComponentsInChildren<Transform>();
-        foreach(Transform t in children) {
-            if(t.gameObject.tag == tag && t.gameObject.activeSelf) {
+        foreach (Transform t in children)
+        {
+            if (t.gameObject.tag == tag && t.gameObject.activeSelf)
+            {
                 return t.gameObject;
             }
         }
         return null;
     }
 
-    public static List<GameObject> findChildrenWithTag(GameObject parent, string tag) { // ищет все объекты наследники(лежащие внутри родителя) с определённым тегом.
+    /// <summary>
+    /// Ищет все объекты наследники(лежащие внутри родителя) с определённым тегом.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="tag"></param>
+    /// <returns>List<GameObject> наследников с нужным тегом</returns>
+    public static List<GameObject> findChildrenWithTag(GameObject parent, string tag)
+    {
         Transform[] children = parent.GetComponentsInChildren<Transform>();
-        List<GameObject> childrenWithTag = new List<GameObject>(); 
-        foreach(Transform t in children) {
-            if(t.gameObject.tag == tag) {
+        List<GameObject> childrenWithTag = new List<GameObject>();
+        foreach (Transform t in children)
+        {
+            if (t.gameObject.tag == tag)
+            {
                 childrenWithTag.Add(t.gameObject);
             }
         }
         return childrenWithTag;
     }
 
-    public static GameObject findChildByName(GameObject parent, string name) {
+    /// <summary>
+    /// Ищет объект наследник, по его имени
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="name"></param>
+    /// <returns>GameObject объекта с нужным именем</returns>
+    public static GameObject findChildByName(GameObject parent, string name)
+    {
         Transform[] children = parent.GetComponentsInChildren<Transform>();
-        foreach(Transform t in children) {
-            if(t.gameObject.name == name) {
+        foreach (Transform t in children)
+        {
+            if (t.gameObject.name == name)
+            {
                 return t.gameObject;
             }
         }

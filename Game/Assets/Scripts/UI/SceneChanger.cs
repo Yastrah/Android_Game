@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class SceneChanger : MonoBehaviour
 {
+    [Header("Объекты")]
+    [Tooltip("Экран загрузки")]
     [SerializeField] private GameObject loadingScreen;
+
+    [Tooltip("Объект, хранящий логику")]
     [SerializeField] private GameObject logic;
+
     private int scene; // сцена на которую нужно перейти
 
     private Animator anim;
@@ -17,27 +22,47 @@ public class SceneChanger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void FadeToScene(int scene) {
+    /// <summary>
+    /// Активация начала перехода на другую сцену
+    /// </summary>
+    /// <param name="scene"></param>
+    public void FadeToScene(int scene)
+    {
         this.scene = scene;
         Time.timeScale = 1f;
         anim.SetTrigger("fade");
     }
 
-    public void OnFadeExit() { // перед уходом со сцены
+    /// <summary>
+    /// Функция, вызывающаяся при выходе со сцены
+    /// </summary>
+    public void OnFadeExit()
+    {
         SceneManager.LoadScene(this.scene);
         StartCoroutine(LoadingScreenOnFade());
     }
 
-    public void OnFadeEnter() { // при появлении на сцене
-        if(logic) {
+    /// <summary>
+    /// Функция, вызывающаяся при появлении на сцены
+    /// </summary>
+    public void OnFadeEnter()
+    {
+        if (logic)
+        {
             logic.SetActive(true);
         }
     }
 
-    IEnumerator LoadingScreenOnFade() {
+   /// <summary>
+   /// Корутина, отвечающая за отображение действий на экране загрузки
+   /// </summary>
+   /// <returns></returns>
+    IEnumerator LoadingScreenOnFade()
+    {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         loadingScreen.SetActive(true);
-        while(!operation.isDone) {
+        while (!operation.isDone)
+        {
             yield return null;
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DialogueWindow : MonoBehaviour
 {
+    [Header("Дополнительные объекты")]
+    [Tooltip("Canvas с элементами управления")]
     [SerializeField] private GameObject controllerInterface;
 
     private DialogueManager dialogueManager;
@@ -14,6 +16,9 @@ public class DialogueWindow : MonoBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
+    /// <summary>
+    /// Функция, вызывающаяся по окончании анимации появления
+    /// </summary>
     public void OnWindowOpen()
     {
         isOpen = true;
@@ -21,6 +26,9 @@ public class DialogueWindow : MonoBehaviour
         controllerInterface.SetActive(false);
     }
 
+    /// <summary>
+    /// Функция, вызывающаяся по окончании анимации скрытия
+    /// </summary>
     public void OnWindowClose()
     {
         if(isOpen) {
@@ -30,6 +38,10 @@ public class DialogueWindow : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Получение текущего статуса окна диалогов
+    /// </summary>
+    /// <returns>bool Открыто ли окно диалогов</returns>
     public bool getStatus() {
         return isOpen;
     }
