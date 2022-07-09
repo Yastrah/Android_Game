@@ -5,67 +5,129 @@ using System;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] protected float lifeTime;
-    [SerializeField] protected float speed;
-    [SerializeField] protected int damage;
-    [SerializeField] protected LayerMask solidLayer; // что пуля будет считать твердым (номер LayerMask)
-    [SerializeField] protected GameTag target; // тэг, объекты которого пуля будет игнорировать
+    [Header("Параметры пули")]
+    [Tooltip("Еффект пули")]
     [SerializeField] protected Notes.Effect effect;
 
+    [Header("Объекты взаимодействия")]
+    [Tooltip("Тег объекта, которому пуля будет наносить урон")]
+    [SerializeField] protected GameTag target;
+
+    [Tooltip("Слой, с которым пуля будет взаимодействовать")]
+    [SerializeField] protected LayerMask solidLayer;
+
+    protected int damage;
+    protected float speed;
+    protected float criticaShot;
+    protected float lifeTime;
     protected string parentName = ""; // имя объекта, пустившего пулю
-    
-    public enum GameTag {
+
+    /// <summary>
+    /// Перечень тегов возможных целей
+    /// </summary>
+    public enum GameTag
+    {
         Player,
         Enemy
     }
 
-    public string PatentName {
-        get {
-            return this.parentName;
-        }
-
-        set {
-            this.parentName = value;
-        }
+    /// <summary>
+    /// Функция, задающая значения при создании пули
+    /// </summary>
+    public void Init(BulletData data, string parentName)
+    {
+        damage = data.Damage;
+        speed = data.Speed;
+        criticaShot = data.CriticalShot;
+        lifeTime = data.LifeTime;
+        this.parentName = parentName;
     }
 
-    protected void Start() {
-        Invoke("DestroyBullet", lifeTime); // вызов уничтожения пули по истечении lifeTime
+    protected void Start()
+    {
+        // вызов уничтожения пули по истечении lifeTime
+        Invoke("DestroyBullet", lifeTime);
     }
 
-    protected void Update() {
-        transform.Translate(Vector2.right * speed * Time.deltaTime); // перемещение пули
+    protected void Update()
+    {
+        // перемещение пули
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
-    
-    protected void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.layer == Math.Log(solidLayer.value, 2)) { // проверка на твёрдость слоя
-            if(other.gameObject.name == parentName) { // проверка на колайдер объекта выпустившего пулю 
+
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+        // проверка на твёрдость слоя
+        if (other.gameObject.layer == Math.Log(solidLayer.value, 2))
+        {
+            // проверка на колайдер объекта выпустившего пулю 
+            if (other.gameObject.name == parentName)
+            {
                 return;
             }
 
-            if(other.CompareTag("Non-Trigger")) {
+            // проверка на колайдер объекта, с котором отключено взаимодействие
+            if (other.CompareTag("Non-Trigger"))
+            {
                 return;
             }
-            
-            if(other.CompareTag(target.ToString())) { // проверка конкретного тега твёрдого объекта
+
+            // проверка конкретного тега твёрдого объекта
+            if (other.CompareTag(target.ToString()))
+            {
                 // Debug.Log($"hit {target.ToString()}");
 
-                switch (target) {
+                switch (target)
+                {
                     case GameTag.Player:
-                        other.GetComponent<Player>().TakeDamage(damage, effect); // вызов функции получения урона
+                        // Проверка на критическое попадание
+                        if(UnityEngine.Random.value <= criticaShot) {
+                            // вызов функции получения урона
+                            other.GetComponent<Player>().TakeDamage(damage*2, effect);
+                            CriticalShot();
+                        }
+                        else
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Player>().TakeDamage(damage, effect);
+                        }
                         break;
+
                     case GameTag.Enemy:
-                        other.GetComponent<Enemy>().TakeDamage(damage, effect); // вызов функции получения урона
+                        // Проверка на критическое попадание
+                        if (UnityEngine.Random.value <= criticaShot)
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Enemy>().TakeDamage(damage * 2, effect);
+                            CriticalShot();
+                        }
+                        else
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Enemy>().TakeDamage(damage, effect);
+                        }
                         break;
                 }
-                
+
             }
-            
+
             DestroyBullet();
         }
     }
 
-    protected void DestroyBullet() { // функция уничтожения пули. добавить эффект
+    /// <summary>
+    /// Действия при критическом попадании
+    /// </summary>
+    protected void CriticalShot()
+    {
+
+    }
+
+    /// <summary>
+    /// Уничтожения пули
+    /// </summary>
+    protected void DestroyBullet()
+    {
         Destroy(gameObject);
     }
 }

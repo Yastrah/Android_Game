@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    [Header("Дополнительные объекты")]
+    [Tooltip("Кнопка взаимодействия")]
     [SerializeField] private GameObject actionButton;
+    
+
+    [Header("Параметры диалога")]
+    [Tooltip("Id диалога")]
     [SerializeField] private string dialogueId;
 
     private Interaction interaction;

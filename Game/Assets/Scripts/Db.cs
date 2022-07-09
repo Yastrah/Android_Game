@@ -14,6 +14,11 @@ public static class Db
         ["d2"] = "NPC"
     };
 
+    /// <summary>
+    /// По переданному id находит нужные данные и собирает их в объект Dialogue
+    /// </summary>
+    /// <param name="dialogueId"></param>
+    /// <returns>Dialogue соответствущий заданному id</returns>
     public static Dialogue GetDialogue(string dialogueId) {
         Dialogue dialogue = new Dialogue(dialoguesTitle[dialogueId], dialoguesSentences[dialogueId]);
 

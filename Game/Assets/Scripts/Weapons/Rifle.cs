@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Rifle : Weapon
 {
-    [SerializeField] private GameObject bullet; // объект используемой пули
-    [SerializeField] private Transform shotPoint; // дуло (точка, откуда вылетают пули)
-    [SerializeField] private LayerMask solidLayer; // что пуля будет считать твердым
+    [Header("Объекты")]
+    [Tooltip("Слой, который считается твёрдым")]
+    [SerializeField] private LayerMask solidLayer;
+
+    [Tooltip("Префаб используемой пули")]
+    [SerializeField] private GameObject bullet;
+
+    [Tooltip("Дуло (точка, откуда вылетают пули)")]
+    [SerializeField] private Transform shotPoint;
 
     private GameObject laserRotation;
     private Transform laserPoint;
     private bool inversion = false; // отражение по y
     private float rotZ; // угол поворота относительно объекта (Игрока, Противника)
-    // private Vector3 difference; // координаты PLayer оттносительно Enemy
 
     private new void Start() {
         base.Start();
@@ -31,27 +36,25 @@ public class Rifle : Weapon
         else if(controller.joystick.Horizontal != 0 || controller.joystick.Vertical != 0) { // если используется левый джостик
             rotZ = Mathf.Atan2(controller.joystick.Vertical, controller.joystick.Horizontal) * Mathf.Rad2Deg;
         }
-
-        // if(player.rightJoystick.Horizontal != 0 || player.rightJoystick.Vertical != 0){ // если используется правый джостик
-        //     rotZ = Mathf.Atan2(player.rightJoystick.Vertical, player.rightJoystick.Horizontal) * Mathf.Rad2Deg;
-        // }
-        // else if(player.leftJoystick.Horizontal != 0 || player.leftJoystick.Vertical != 0) { // если используется левый джостик
-        //     rotZ = Mathf.Atan2(player.leftJoystick.Vertical, player.leftJoystick.Horizontal) * Mathf.Rad2Deg;
-        // }
         
-        if((rotZ > 90 || rotZ < -90) && inversion == false) { Flip(); } // инверсия относительно Y
+        // Инверсия относительно Y
+        if((rotZ > 90 || rotZ < -90) && inversion == false) { Flip(); }
         else if(rotZ < 90 && rotZ > -90 && inversion == true) { Flip(); }
         
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ); // поворот
 
-        if(reloadTime <= 0 && controller.holdShoot) { // перезарядка + нажатие джостика для стрельбы
+        // Проверка на перезарядку + нажатие кнопки стрельбы
+        if (reloadTime <= 0 && controller.holdShoot) {
             Shoot();
         }
         else { reloadTime -= Time.deltaTime; }
 
-        // if(reloadTime > 0) { reloadTime -= Time.deltaTime; }
     }
 
+    /// <summary>
+    /// Функция поиска ближайшего к игроку противника, перед которым нет преграды, и находещегося в зоне видимости камеры
+    /// </summary>
+    /// <returns>GameObject ближайшего доступного противника</returns>
     private GameObject NearEnemy() {
         GameObject nearEnemy = null;
         float minDistance = 100;
@@ -62,7 +65,6 @@ public class Rifle : Weapon
             laserRotation.transform.rotation = Quaternion.Euler(0f, 0f, bufRotZ);
 
             RaycastHit2D hitInfo = Physics2D.Raycast(laserPoint.position, laserPoint.right, difference.magnitude, solidLayer);
-            // RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Quaternion.Euler(0f, 0f, bufRotZ).eulerAngles, difference.magnitude, solidLayer);
             
             if(hitInfo.collider != null) {
                 // Debug.Log(hitInfo.collider.name);
@@ -78,21 +80,22 @@ public class Rifle : Weapon
         return nearEnemy;
     }
 
-    // public override void Fire() { // функцие вызывающаяся при нажатии на кнопку стрельбы
-    //     Debug.Log("Fire");
+    /// <summary>
+    /// Выстрел
+    /// </summary>
+    private void Shoot() {
+        // Создание объекта пули в месте shotPoint и присваивание имени родителя
+        GameObject newBullet = Instantiate(bullet, shotPoint.position, transform.rotation);
+        newBullet.GetComponent<Bullet>().Init(weaponData.BulletSettings, transform.parent.gameObject.name);
 
-    //     if(reloadTime <= 0) {
-    //         Shoot();
-    //     }
-    // }
-
-    private void Shoot() { // выстрел
-        GameObject newBullet = Instantiate(bullet, shotPoint.position, transform.rotation); // создание объекта пули в месте shotPoint
-        newBullet.GetComponent<Bullet>().PatentName = transform.parent.gameObject.name;
-        reloadTime = coolDown; // обнуление времени межлу выстрелами
+        // обнуление времени межлу выстрелами
+        reloadTime = coolDown;
     }
 
-    private void Flip() { // поворот спрайта относительно Y
+    /// <summary>
+    /// Поворот спрайта относительно Y
+    /// </summary>
+    private void Flip() {
         inversion = !inversion;
         Vector3 Scaler = transform.localScale;
         Scaler.y *= -1;
