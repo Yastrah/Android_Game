@@ -5,23 +5,27 @@ using UnityEngine;
 public class RangedEnemy : Enemy
 {
     [Header("Параметры оружия")]
-    [Tooltip("Тип оружия")]
-    [SerializeField] private GunType gunType;
-
     [Tooltip("Время между выcтрелами")]
     [SerializeField] private float coolDown;
 
+    [Tooltip("Настройки пули")]
+    [SerializeField] private BulletData bulletSettings;
+
+
     [Header("Объекты")]
-    [Tooltip("Слой, который считается твёрдым")]
-    [SerializeField] private LayerMask solidLayer;
+    [Tooltip("Объект оружия, если оно представлено отдельным объектом")]
+    [SerializeField] private GameObject weapon;
+
+    [Tooltip("Дуло (точка, откуда вылетают пули)")]
+    [SerializeField] private Transform shotPoint;
 
     [Tooltip("Префаб используемой пули")]
     [SerializeField] private GameObject bullet;
 
-    [Tooltip("Дуло (точка, откуда вылетают пули)")]
-    [SerializeField] private Transform shotPoint;
-    
-    private GameObject weapon;
+    [Tooltip("Слой, который считается твёрдым")]
+    [SerializeField] private LayerMask solidLayer;
+
+    //private GameObject weapon;
     private GameObject laserRotation;
     private Transform laserPoint;
     private Vector2 difference; // расстояние до Player
@@ -31,22 +35,12 @@ public class RangedEnemy : Enemy
     private bool onSight; // игрок находится на прицеле (между ними нет препятствий)
     // UnityEngine.Random
 
-    /// <summary>
-    /// Тип оружия
-    /// </summary>
-    private enum GunType
-    {
-        Static,
-        Dynamic
-    }
-
     private new void Start()
     {
         base.Start();
 
         laserRotation = Notes.findChildByName(gameObject, "LaserRotation");
         laserPoint = Notes.findChildByName(gameObject, "LaserPoint").transform;
-        weapon = Notes.findChildWithTag(gameObject, "Weapon");
     }
 
     private new void Update()
@@ -74,14 +68,13 @@ public class RangedEnemy : Enemy
                 case StatusType.Aggressive:
                     AggressiveBehaviour();
 
-                    switch (gunType)
+                    if(weapon)
                     {
-                        case GunType.Static:
-                            StaticGun();
-                            break;
-                        case GunType.Dynamic:
-                            DynamicGun();
-                            break;
+                        DynamicGun();
+                    }
+                    else
+                    {
+                        StaticGun();
                     }
 
                     break;
@@ -202,7 +195,7 @@ public class RangedEnemy : Enemy
     {
         // Создание объекта пули в месте shotPoint и присваивание имени родителя
         GameObject newBullet = Instantiate(bullet, shotPoint.position, weapon.transform.rotation);
-        newBullet.GetComponent<Bullet>().PatentName = gameObject.name;
+        newBullet.GetComponent<Bullet>().Init(bulletSettings, gameObject.name);
 
         // Обнуление времени межлу выстрелами
         reloadTime = coolDown;

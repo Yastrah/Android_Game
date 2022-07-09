@@ -7,10 +7,11 @@ using System;
 public class Player : MonoBehaviour
 {
     [Header("Параметры игрока")]
-    [Tooltip("Здоровье игрока")]
-    [SerializeField] private int health;
+    [Tooltip("Максимальное здоровье игрока")]
+    [SerializeField] private int maxHealth;
 
     [Tooltip("Скорость игрока")]
+    [Range(2f, 7f)]
     [SerializeField] private float speed;
 
     [HideInInspector] public Controller controller;
@@ -21,13 +22,14 @@ public class Player : MonoBehaviour
     private Animator anim;
     private Inventory inventory;
 
+    private int health;
     private Notes.Effect effect;
     private bool facingRight = true;
 
     private Push push;
     private bool isPushing = false;
     private float pushSpeed;
-    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 1.4f, ["speed"] = 5f };
+    private Dictionary<string, float> pushInfo;
 
     private void Start()
     {
@@ -36,6 +38,9 @@ public class Player : MonoBehaviour
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
         inventory = GetComponent<Inventory>();
+
+        pushInfo = new Dictionary<string, float>() { ["length"] = 1.4f, ["speed"] = 5f };
+        health = maxHealth;
     }
 
     private void Update()

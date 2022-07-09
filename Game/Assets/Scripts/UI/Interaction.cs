@@ -6,6 +6,7 @@ public class Interaction : MonoBehaviour
 {
     [HideInInspector] public InteractionType type;
     [HideInInspector] public string ActionName = ""; // имя weapon, или id диалога, или имя окна магазина
+    [HideInInspector] public DialogueData dialogue;
 
     /// <summary>
     /// Все типы взаимодействия

@@ -10,12 +10,12 @@ public class SceneChanger : MonoBehaviour
     [Tooltip("Экран загрузки")]
     [SerializeField] private GameObject loadingScreen;
 
-    [Tooltip("Объект, хранящий логику")]
-    [SerializeField] private GameObject logic;
-
+    private bool sceneIsActive = false;
     private int scene; // сцена на которую нужно перейти
 
     private Animator anim;
+
+    public bool SceneIsActive { get { return sceneIsActive; } }
 
     private void Start()
     {
@@ -47,10 +47,7 @@ public class SceneChanger : MonoBehaviour
     /// </summary>
     public void OnFadeEnter()
     {
-        if (logic)
-        {
-            logic.SetActive(true);
-        }
+        sceneIsActive = true;
     }
 
    /// <summary>

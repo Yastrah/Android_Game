@@ -1,16 +1,16 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [Header("Параметры оружия")]
-    [Tooltip("Тип оружия")]
-    [SerializeField] protected WeaponType weaponType;
+    [Header("Параметры")]
+    [Tooltip("Объект с параметрами")]
+    public WeaponData weaponData;
 
-    [Tooltip("время между выcтрелами/ударами")]
-    [SerializeField] protected float coolDown;
+    protected WeaponType weaponClass;
+    protected float coolDown;
 
     protected float reloadTime; // вспомогательная переменная для хранения времени до выстрела/удара
     protected Controller controller;
@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour
     /// <summary>
     /// Все типы оружия 
     /// </summary>
-    protected enum WeaponType {
+    public enum WeaponType {
         AssaultRifle, // штурмовая винтовка
         SniperRifle, // снайперская винтовка
         Pistol, // пистолет
@@ -29,6 +29,9 @@ public class Weapon : MonoBehaviour
     {
         controller = FindObjectOfType<Controller>();
         reloadTime = coolDown;
+
+        coolDown = weaponData.CoolDown;
+        weaponClass = weaponData.WeaponClass;
     }
 
 }

@@ -86,7 +86,7 @@ public class Rifle : Weapon
     private void Shoot() {
         // Создание объекта пули в месте shotPoint и присваивание имени родителя
         GameObject newBullet = Instantiate(bullet, shotPoint.position, transform.rotation);
-        newBullet.GetComponent<Bullet>().PatentName = transform.parent.gameObject.name;
+        newBullet.GetComponent<Bullet>().Init(weaponData.BulletSettings, transform.parent.gameObject.name);
 
         // обнуление времени межлу выстрелами
         reloadTime = coolDown;

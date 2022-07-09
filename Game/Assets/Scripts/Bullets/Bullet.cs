@@ -6,25 +6,20 @@ using System;
 public class Bullet : MonoBehaviour
 {
     [Header("Параметры пули")]
-    [Tooltip("Время, после которого пуля уничтожается")]
-    [SerializeField] protected float lifeTime;
-
-    [Tooltip("Скорость пули")]
-    [SerializeField] protected float speed;
-
-    [Tooltip("Урон пули")]
-    [SerializeField] protected int damage;
-
     [Tooltip("Еффект пули")]
     [SerializeField] protected Notes.Effect effect;
 
     [Header("Объекты взаимодействия")]
-    [Tooltip("Слой, с которым пуля будет взаимодействовать")]
-    [SerializeField] protected LayerMask solidLayer;
-
     [Tooltip("Тег объекта, которому пуля будет наносить урон")]
     [SerializeField] protected GameTag target;
 
+    [Tooltip("Слой, с которым пуля будет взаимодействовать")]
+    [SerializeField] protected LayerMask solidLayer;
+
+    protected int damage;
+    protected float speed;
+    protected float criticaShot;
+    protected float lifeTime;
     protected string parentName = ""; // имя объекта, пустившего пулю
 
     /// <summary>
@@ -37,19 +32,15 @@ public class Bullet : MonoBehaviour
     }
 
     /// <summary>
-    /// Имя объекта, выпустившего пулю
+    /// Функция, задающая значения при создании пули
     /// </summary>
-    public string PatentName
+    public void Init(BulletData data, string parentName)
     {
-        get
-        {
-            return this.parentName;
-        }
-
-        set
-        {
-            this.parentName = value;
-        }
+        damage = data.Damage;
+        speed = data.Speed;
+        criticaShot = data.CriticalShot;
+        lifeTime = data.LifeTime;
+        this.parentName = parentName;
     }
 
     protected void Start()
@@ -89,12 +80,32 @@ public class Bullet : MonoBehaviour
                 switch (target)
                 {
                     case GameTag.Player:
-                        // вызов функции получения урона
-                        other.GetComponent<Player>().TakeDamage(damage, effect);
+                        // Проверка на критическое попадание
+                        if(UnityEngine.Random.value <= criticaShot) {
+                            // вызов функции получения урона
+                            other.GetComponent<Player>().TakeDamage(damage*2, effect);
+                            CriticalShot();
+                        }
+                        else
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Player>().TakeDamage(damage, effect);
+                        }
                         break;
+
                     case GameTag.Enemy:
-                        // вызов функции получения урона
-                        other.GetComponent<Enemy>().TakeDamage(damage, effect);
+                        // Проверка на критическое попадание
+                        if (UnityEngine.Random.value <= criticaShot)
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Enemy>().TakeDamage(damage * 2, effect);
+                            CriticalShot();
+                        }
+                        else
+                        {
+                            // вызов функции получения урона
+                            other.GetComponent<Enemy>().TakeDamage(damage, effect);
+                        }
                         break;
                 }
 
@@ -102,6 +113,14 @@ public class Bullet : MonoBehaviour
 
             DestroyBullet();
         }
+    }
+
+    /// <summary>
+    /// Действия при критическом попадании
+    /// </summary>
+    protected void CriticalShot()
+    {
+
     }
 
     /// <summary>

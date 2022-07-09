@@ -49,11 +49,12 @@ MonoBehaviour:
   lifeTime: 3
   speed: 12
   damage: 1
+  criticaShot: 0.2
+  effect: 0
   solidLayer:
     serializedVersion: 2
     m_Bits: 8
   target: 1
-  effect: 0
 --- !u!61 &6810722024452881951
 BoxCollider2D:
   m_ObjectHideFlags: 0

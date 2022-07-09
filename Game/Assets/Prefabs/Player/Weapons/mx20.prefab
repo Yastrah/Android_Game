@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4999659930398478678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.018, y: -0.068, z: 0}
-  m_LocalScale: {x: 2.4, y: 2.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4999659930867845140}
   m_Father: {fileID: 0}
@@ -45,13 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71385ba8a3031114787bf25ce9295812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
-  coolDown: 0.3
-  bullet: {fileID: 2654174396494054285, guid: 02e6102bcb2f41f498d4b673f58ca66d, type: 3}
-  shotPoint: {fileID: 4999659930867845140}
+  weaponData: {fileID: 0}
   solidLayer:
     serializedVersion: 2
     m_Bits: 8
+  bullet: {fileID: 2654174396494054285, guid: 02e6102bcb2f41f498d4b673f58ca66d, type: 3}
+  shotPoint: {fileID: 4999659930867845140}
 --- !u!212 &4999659930398478683
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96,8 +95,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.58, y: 0.2}
+  m_DrawMode: 1
+  m_Size: {x: 1.392, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -113,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4999659930867845140}
   m_Layer: 0
-  m_Name: shotPoint
+  m_Name: Shot Point
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -127,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4999659930867845141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.321, y: 0.028, z: 0}
+  m_LocalPosition: {x: 0.786, y: 0.058, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4999659930398478677}

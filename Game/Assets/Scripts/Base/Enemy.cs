@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     protected Push push;
     protected bool isPushing = false;
     protected float pushSpeed;
-    private Dictionary<string, float> pushInfo = new Dictionary<string, float>() { ["length"] = 0.6f, ["speed"] = 3.5f }; 
+    private Dictionary<string, float> pushInfo;
 
     [HideInInspector] public bool isVisible = false;
     private bool facingRight = true;
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         objAnimation = Notes.findChildByName(gameObject, "Animation");
         anim = objAnimation.GetComponent<Animator>(); // получение анимаций
         player = FindObjectOfType<Player>();
+        pushInfo = new Dictionary<string, float>() { ["length"] = 0.6f, ["speed"] = 3.5f };
     }
 
     protected void Update()
